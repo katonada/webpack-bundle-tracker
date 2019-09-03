@@ -84,8 +84,7 @@ Plugin.prototype.apply = function(compiler) {
             } else {
               chunks[self.options.preload] = [F];
             }
-          }
-          if (chunk.id) {
+          } else {
             if(chunks[self.options.prefetch]) {
               chunks[self.options.prefetch].push(F);
             } else {
