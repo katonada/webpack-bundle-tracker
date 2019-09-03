@@ -1,6 +1,6 @@
 {
-  "name": "webpack-bundle-tracker",
-  "version": "0.4.2-beta",
+  "name": "webpack-bundle-tracker-async",
+  "version": "0.5.1-beta",
   "description": "Spits out some stats about webpack compilation process to a file",
   "license": "MIT",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/owais/webpack-bundle-tracker.git"
+    "url": "https://github.com/katonada/webpack-bundle-tracker"
   },
   "keywords": [
     "webpack",
