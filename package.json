@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/katonada/webpack-bundle-tracker"
+    "url": "git+https://github.com/katonada/webpack-bundle-tracker.git"
   },
   "keywords": [
     "webpack",
@@ -31,5 +31,6 @@
     "deep-extend": "^0.6.0",
     "mkdirp": "^0.5.1",
     "strip-ansi": "^2.0.1"
-  }
+  },
+  "homepage": "https://github.com/katonada/webpack-bundle-tracker#readme"
 }
