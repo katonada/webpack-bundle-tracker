@@ -1,6 +1,6 @@
 {
   "name": "webpack-bundle-tracker-async",
-  "version": "0.5.1-beta",
+  "version": "0.5.2-beta",
   "description": "Spits out some stats about webpack compilation process to a file",
   "license": "MIT",
   "main": "index.js",
