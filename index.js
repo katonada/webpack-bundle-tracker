@@ -16,6 +16,12 @@ function Plugin(options) {
   if (this.options.logTime === undefined) {
     this.options.logTime = DEFAULT_LOG_TIME;
   }
+  if (this.options.preload === undefined) {
+    this.options.logTime = 'async_preload';
+  }
+  if (this.options.prefetch === undefined) {
+    this.options.logTime = 'async_prefetch';
+  }
 }
 
 Plugin.prototype.apply = function(compiler) {
@@ -72,14 +78,51 @@ Plugin.prototype.apply = function(compiler) {
           if (compiler.options.output.path) {
             F.path = path.join(compiler.options.output.path, file);
           }
+          if (chunk.name) {
+            if(chunks[self.options.preload]) {
+              chunks[self.options.preload].push(F);
+            } else {
+              chunks[self.options.preload] = [F];
+            }
+          }
+          if (chunk.id) {
+            if(chunks[self.options.prefetch]) {
+              chunks[self.options.prefetch].push(F);
+            } else {
+              chunks[self.options.prefetch] = [F];
+            }
+          }
           return F;
         });
         chunks[chunk.name] = files;
       });
+
       var output = {
         status: 'done',
         chunks: chunks
       };
+
+      if (stats.compilation.entrypoints){
+        var entryPoints = {};
+        stats.compilation.entrypoints.forEach(function(value, entrypoint) {
+        entrypointsChunks = value.chunks.map(function(chunk) {
+          var files = chunk.files.map(function(file){
+            var F = {name: file};
+            var publicPath = self.options.publicPath || compiler.options.output.publicPath;
+            if (publicPath) {
+              F.publicPath = publicPath + file;
+            }
+            if (compiler.options.output.path) {
+              F.path = path.join(compiler.options.output.path, file);
+            }
+            return F;
+            });
+          return files;
+          });
+        entryPoints[entrypoint] = entrypointsChunks;
+        });
+      output['entryPoints'] = entryPoints
+      }
 
       if (self.options.logTime === true) {
         output.startTime = stats.startTime;
